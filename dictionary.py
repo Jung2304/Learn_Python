@@ -30,9 +30,9 @@ infor = {
 print(type(infor))
 
 #< Tạo dict bằng hàm zip()
-a = ['name', 'job', 'web']          # lưu key trong một list
-b = ['28tech', 'dev', '28tech.com.vn']          # lưu values trong một list 
-c = dict(zip(a, b))
+key = ['name', 'job', 'web']          # lưu key trong một list
+value = ['28tech', 'dev', '28tech.com.vn']          # lưu values trong một list 
+c = dict(zip(key, value))
 print(c)
 
 #< Tạo dict bằng hàm fromkeys: Khi muốn các key đều chung một value
@@ -103,9 +103,8 @@ infor = {
     'web' : '28tech.com.vn',
     'city' : 'HCM'
 }
-for (key, value) in infor.items():
-    # print(key, value, sep = '->')      # cách khác 
-    print(key + '->' + str(value))
+for (key, value) in infor.items():       # method items() trả về iterable chứa các cặp (key, value)
+    print(key, value, sep = '->')     
 """
 
 #ANCHOR - Thêm và sửa dict
@@ -190,7 +189,6 @@ print(d)
 
 #ANCHOR - Key, Value trong Dict comp
 """
-
 s = ["28tech", "PyThON", "jaVA", "c++"]
 d = {x.lower() : x.upper() for x in s}          # khi này x.lower() là key, x.upper() là value
 for key, val in d.items():
