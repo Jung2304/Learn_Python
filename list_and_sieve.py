@@ -261,11 +261,6 @@ print(c)
 n = int(input())    # nhập số ptu trong mảng
 a = list(map(int, input().split()))
 print(a)
-#< a = list(map(int, input().split()))
-# input(): waits for the user to type something and press Enter
-# .split(): splits the input string by spaces (default). From "5 10 15" → becomes ["5", "10", "15"] (a list of strings).
-# map(int, ...): Applies the int() function to each element of the list. (you know, 'mapping')
-#> list(...): Converts the map object into a list.
 """
 #!SECTION
 
@@ -339,7 +334,7 @@ list = list(map(int, input().split()))
 min_val, max_val = min(list), max(list)
 
 #> Vị trí cuối cùng của gtri nhỏ nhất trong mảng -> duyệt từ cuối về
-for i in range(n - 1, -1, -1):
+for i in range(n - 1, -1, -1):        # không skip index 0
     if min_val == list[i]:
         print(i, end = ' ')
         break
@@ -382,16 +377,16 @@ print(res)
 
 #ANCHOR - Số lớn nhất và lớn thứ 2 (2 gtri có thể giống nhau)
 """
-#< Cách 1: Dùng biến và vòng for
+#< Cách 1: Dùng biến và vòng lặp for
 n = int(input())
 list = list(map(int, input().split()))
 min_val, max_val = min(list), max(list)
-sec_max = 0
-print('Số lớn nhất:', max_val)
-for i in list:
-    if (i > min_val) and (i <= max_val):
-        sec_max = i
-print('Số lớn thứ 2:', sec_max)
+sec_max = min_val
+print("Số lớn nhất:", max_val)
+for i in range(n):
+  if (list[i] > sec_max) and (list[i] <= max_val):
+    sec_max = list[i]
+print("Số lớn thứ hai:", sec_max)
 
 #< Cách 2: Dùng sort
 n = int(input())
@@ -408,26 +403,26 @@ from math import *
 #! Cách 1: Đếm thông thường
 #< Số lượng snt trong list
 def checkSnt(n):
-    if n < 2:
-        return False
-    for i in range(2, isqrt(n) + 1):            # range cần int
-        if n % i == 0:
-            return False
+  if n < 2:
+    return False
+  for i in range(2, isqrt(n) + 1):            # isqurt vì range cần là int
+    if n % i == 0:
+      return False
     return n > 1
 
 #< Số lượng số thuận nghịch trong dãy
 def checkThuanNghich(n):
-    if n < 10:
-        return True
-    tmp = n
-    rev = 0
-    while n != 0:
-        rev += n % 10
-        n //= 10
-    if tmp == rev:
-        return True
-    else:
-        return False
+  if n < 10:
+    return True
+  tmp = n
+  rev = 0
+  while n != 0:
+    rev += n % 10
+    n //= 10
+  if tmp == rev:
+    return True
+  else:
+    return False
 
 #< Số lượng số chính phương trong dãy
 def checkChinhPhuong(n):
@@ -708,15 +703,15 @@ if __name__ == '__main__':
 #< Dùng kĩ thuật gặp nhau ở giữa
 
 def checkPytago(a, n):
-    for i in range(n - 1, 1, -1):       # i is treated as the largest (potential hypotenuse)
-        left, right = 0, i - 1          # Two pointers starting from both ends
-        while left < right:
-            if a[left] + a[right] == a[i]:
-                return True
-            elif a[left] + a[right] < a[i]:
-                left += 1
-            else:
-                right -= 1
+  for i in range(n - 1, 1, -1):       # i is treated as the largest (potential hypotenuse)
+    left, right = 0, i - 1          # Two pointers starting from both ends
+    while left < right:
+        if a[left] + a[right] == a[i]:
+            return True
+        elif a[left] + a[right] < a[i]:
+            left += 1
+        else:
+            right -= 1
     return False
 
 n = int(input())
@@ -758,10 +753,10 @@ F = [3, 4, 8, 10]
 
 F = [None] * n
 for i in range(n):
-    if i == 0:
-        F[0] = a[0]
-    else:
-        F[i] = F[i - 1] + a[i]
+  if i == 0:
+    F[0] = a[0]
+  else:
+    F[i] = F[i - 1] + a[i]
 q = int(input())
 for i in range(q):
     l, r = map(int, input().split())
@@ -782,10 +777,10 @@ n = int(input())
 a = list(map(int, input().split()))
 d = {}
 for x in a:
-    if x in d:
-        d[x] += 1
-    else:
-        d[x] = 1
+  if x in d:
+    d[x] += 1
+  else:
+    d[x] = 1
 ans = 0
 for x in d:
     ans += d[x] * (d[x] - 1) // 2       # cộng dồn số cặp bằng nhau
