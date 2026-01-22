@@ -239,12 +239,48 @@ from collections import Counter
 n = int(input())
 a = list(map(int, input().split()))
 b = dict(Counter(a))
-c = list(b.items())
 for giatri, tansuat in b.items():
     print(giatri, tansuat)
 """
 
+#ANCHOR - Đếm phân phối sử dụng mảng
 
+n = int(input())
+a = list(map(int, input().split()))
+cnt = [0] * 1001
+for x in a:
+  cnt[x] += 1
+se = set({})
+
+# Theo thứ tự xuất hiện
+for x in a: 
+  if x not in se:
+    print(x, cnt[x])
+    se.add(x)       
+print()
+
+# Theo thứ tự từ nhỏ tới lớn
+for x in range(1001):     # Theo thứ tự
+  if cnt[x] != 0:
+    print(x, cnt[x])
+print()
+
+# Số có số lần xuất hiện nhiều nhất, nếu cùng số lần xuất hiện thì chọn số lớn hơn
+res, dem = 0, 0
+for x in range(1001):
+  if cnt[x] >= dem:
+    res = x
+    dem = cnt[x]
+print(res, dem)
+print()
+
+# Số có số lần xuất hiện ít nhất, nếu cùng số lần xuất hiện thì chọn số nhỏ hơn
+res1, dem1 = 0, 10**9
+for x in range(1001):
+  if cnt[x] != 0 and cnt[x] < dem1:
+    res1 = x
+    dem1 = cnt[x]
+print(res1, dem1)
 
 #!SECTION
 
