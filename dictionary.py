@@ -244,7 +244,7 @@ for giatri, tansuat in b.items():
 """
 
 #ANCHOR - Đếm phân phối sử dụng mảng
-
+"""
 n = int(input())
 a = list(map(int, input().split()))
 cnt = [0] * 1001
@@ -281,6 +281,52 @@ for x in range(1001):
     res1 = x
     dem1 = cnt[x]
 print(res1, dem1)
+"""
+
+#ANCHOR - Kiểm tra mảng tăng dần (tăng chặt)
+"""
+n = int(input())
+a = list(map(int, input().split()))
+for i in range(1, n):
+  if a[i] <= a[i - 1]:
+    print("NO")
+    exit()          # gặp đk dừng là dừng luôn
+print("YES")
+"""
+
+#ANCHOR - Số lớn hơn các số đứng trước
+"""
+# Liệt kê các ptu trong dãy lớn hơn TẤT CẢ các số đứng trước nó (Ptu đầu tiên đc coi là thỏa mãn)
+n = int(input())
+a = list(map(int, input().split()))
+Max = -10**9
+for x in a:
+  if x > Max:
+    print(x, end = ' ')
+    Max = x
+"""
+
+#ANCHOR - Die hard
+
+def check(a, n):
+  price = 25
+  total = 0
+  for x in range(n):
+    if (a[x] == price):
+      total += a[x]
+    else:
+      payback = a[x] - price
+      total -= payback
+      if (total < 0):
+        return False
+  return True
+
+n = int(input())
+a = list(map(int, input().split()))
+if check(a, n):
+  print("YES")
+else:
+  print("NO")
 
 #!SECTION
 
