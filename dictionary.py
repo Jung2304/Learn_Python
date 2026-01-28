@@ -307,7 +307,7 @@ for x in a:
 """
 
 #ANCHOR - Die hard
-
+"""
 def check(a, n):
   price = 25
   total = 0
@@ -327,6 +327,46 @@ if check(a, n):
   print("YES")
 else:
   print("NO")
+"""
+
+#ANCHOR - Gửi thư
+"""
+# Gần nhất: thành phố đứng trước và sau
+# Xa nhất: thành phố đầu và cuối
+import math
+n = int(input())
+a = list(map(int, input().split()))
+mini, maxi = {}, {}
+for x in range(n):
+  previous = abs(a[x] - a[x - 1])
+  after = abs(a[x] - a[x + 1]) if x != (n - 1) else previous        # khi không phải ptu cuối
+  mini = previous if previous < after else after 
+  
+  first = abs(a[x] - a[0])
+  last = abs(a[n - 1] - a[x])
+  maxi  = first if first > last else last
+  print(mini, maxi, end = "\n")
+"""
+
+#ANCHOR - Đếm cặp snt cùng nhau
+"""
+# Hai snt cùng nhau có UCLN bằng 1
+import math
+n = int(input())
+a = list(map(int, input().split()))
+ans = 0
+for i in range(n):
+  for j in range(i):
+    if math.gcd(a[i], a[j]) == 1:
+      ans += 1
+print(ans)
+"""
+
+1:08:31
+
+
+
+
 
 #!SECTION
 
