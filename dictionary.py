@@ -358,15 +358,148 @@ ans = 0
 for i in range(n):
   for j in range(i):
     if math.gcd(a[i], a[j]) == 1:
+      print(f"({a[i]},{a[j]})", end = ", ")
       ans += 1
-print(ans)
+print("\n", ans)
 """
 
-1:08:31
+#ANCHOR - Đổi tiền tham lam
+"""
+n = int(input())
+cnt = 0
+tmp = n
+money = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
+length = len(money)
+for x in range(length - 1, -1, -1):
+  cnt += tmp // money[x]      # chia nguyên làm tròn xuống để biết số tờ cần dùng của mệnh giá đó. VD: 580 // 1000 = 0 ; 580 // 500 = 1
+  tmp %= money[x]   # chia lấy dư để lấy số tiền còn lại. VD: 580 % 1000 = 580
+print(cnt)
+"""
 
+#ANCHOR - Dãy con dài nhất các ptu liền kề khác nhau
+"""
+# Tìm độ dài của dãy con liên tiếp các ptu sao cho các ptu liền kề nhau trong dãy con đều khác nhau
+# Nếu có nhiều dãy con thỏa mãn, hãy in ra dãy con có tổng lớn nhất
+n = int(input())
+a = list(map(int, input().split()))
+a.append(a[-1])       # ép dãy cuối cùng được xử lý khi vòng lặp kết thúc
+sum, cnt, res, idx, ans = a[0], 1, 1, 0, a[0]        
+#< sum: tổng dãy con hiện tại, cnt: số ptu trong dãy con hiện tại, res: độ dài dãy tốt nhất, idx: vị trí bắt đầu dãy tốt nhất, ans: tổng lớn nhất của dãy dài nhất
 
+for i in range(1, n + 1):       # n + 1 vì append thêm 1 ptu
+  if (a[i] != a[i - 1]):        # nếu ptu sau != ptu trước
+    cnt += 1                    # thì cnt += 1
+    sum += a[i]                 # tính tổng dãy
+  else:                         # khi dãy con kết thúc (ptu sau != ptu trước)
+    if (cnt > res):             # nếu sl ptu trong dãy hiện tại > sl ptu trong dãy tốt nhất
+      res = cnt                 # thì cập nhật sl ptu tốt nhất mới
+      ans = sum                 # cập nhật tổng lớn nhất = tổng dãy con hiện tại
+      idx = i - cnt             # i: ptu đầu tiên KHÔNG thuộc dãy, cnt: độ dài dãy con vừa kết thúc --> index bắt đầu của dãy con lớn nhất  
+    elif cnt == res:            # nếu bằng độ dài
+      if sum > ans:             # chọn dãy có tổng lớn hơn
+        ans = sum               # lưu tổng độ dài lớn nhất  
+        idx = i - cnt           
+    cnt = 1                     # chuẩn bị cho dãy kế tiếp
+    sum = a[i]                  
+print(res)
+for i in range(res):
+  print(a[idx + i], end = ' ')        # in từng ptu trong dãy con lớn nhất
+"""
 
+#ANCHOR - Dãy số ưu thế
+"""
+# Gọi là dãy ưu thế nếu thỏa 1 trong 2 điều kiện sau đây:
+#> Ưu thế chẵn: Số ptu của dãy là chẵn và sl chẵn trong dãy nhiều hơn sl lẻ
+#> Ưu thế lẻ: Số ptu của dãy là lẻ và sl lẻ trong dãy nhiều hơn sl chẵn
+a = list(map(int, input().split()))
+length = len(a)
+cnt_odd, cnt_even = 0, 0
+for x in range(length):
+  if (a[x] % 2 == 0):
+    cnt_even += 1
+  else:
+    cnt_odd += 1
+if (length % 2 == 0 and cnt_even > cnt_odd):
+  print("YES. Ưu thế chẵn")
+elif (length % 2 != 0 and cnt_odd > cnt_even):
+  print("YES. Ưu thế lẻ")
+else:
+  print("NO")
+"""
 
+#ANCHOR - Số thao tác giúp mảng tăng dần
+"""
+# Tìm số đơn vị tối thiểu cần thêm vào các ptu trong mảng sao cho mảng trở thành một dãy tăng chặt
+n = int(input())
+a = list(map(int, input().split()))
+res = 0
+for x in range(1, n):
+  if (a[x] <= a[x - 1]):
+    amount = abs(a[x] - a[x - 1])
+    res += amount + 1
+print(res)  
+"""
 
+#ANCHOR - Trộn 2 dãy đã sắp xếp
+"""
+# Cho 2 mảng đã được sắp xếp tăng dần, thực hiện trộn 2 dãy trên thành một dãy được sắp xếp
+#< Merge sort
+n, m = list(map(int, input().split()))
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+res = []
+i, j = 0, 0
+while i < n and j < m:
+  if a[i] <= b[j]:
+    res.append(a[i])
+    i += 1
+  else:
+    res.append(b[j])
+    j += 1
+while i < n:
+  res.append(a[i])
+  i += 1
+while j < m:
+  res.append(b[j])
+  j += 1
+for x in res:
+  print(x, end = " ")
+"""
+
+#ANCHOR - Đếm tần suất
+"""
+n = int(input())
+a = list(map(int, input().split()))
+d = {}
+for x in a:
+  if x in d:
+    d[x] += 1
+  else:
+    d[x] = 1
+
+d1 = sorted(d.items())
+for value, frequency in d1:
+  print(value, frequency)
+print()
+for value, frequency in d.items():
+  print(value, frequency)
+"""
+
+#ANCHOR - Tìm hợp và giao của 2 mảng (1)
+"""
+n, m = list(map(int, input().split()))
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+c = set(a)      # Dùng set để lấy các ptu UNIQUE của list a
+d = set(b)      
+
+intersection = sorted(c & d)    # Giao: là tập hợp chứa tất cả các phần tử chung của hai hay nhiều tập hợp A và B
+union = sorted(c | d)           # Hợp: là tập hợp chứa tất cả các phần tử thuộc tập A, thuộc tập B, hoặc thuộc cả hai
+
+print(*intersection)
+print(*union)     #< "*": unpacking operator 
+"""
+
+1:44:06
 #!SECTION
 

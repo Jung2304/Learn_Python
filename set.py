@@ -2,10 +2,10 @@
 
 #SECTION - LÝ THUYẾT SET
 """
-- Set trong Python là một tập hợp các phần duy nhất không có thứ tự. Chúng thường được sử dụng để tính toán các phép toán liên quan tới tập hợp
+- Set trong Python là một tập hợp các phần tử duy nhất không có thứ tự. Chúng thường được sử dụng để tính toán các phép toán liên quan tới tập hợp
 #! Các tính chất của Set
 > Sets are unordered: Các ptu trong set không có thứ tự nhất định nào cả
-> Set items are unique: Các ptu trong set là độc nhất, không có 2 ptu nào trong set trùng nhau
+> Set items are UNIQUE: Các ptu trong set là độc nhất, không có 2 ptu nào trong set trùng nhau
 > Sets are unindexed: Set không thể truy cập được thông qua chỉ số
 > Sets are changeable (mutable): set CÓ thể thay đổi 
 """
