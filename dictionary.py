@@ -500,6 +500,56 @@ print(*intersection)
 print(*union)     #< "*": unpacking operator 
 """
 
-1:44:06
+#ANCHOR - Tìm hợp và giao của 2 mảng (2)
+# Giống bài trộn 2 dãy đã sắp xếp. Nếu khác nhau thì đưa vào hợp, giống nhau đưa cả vào hợp và giao
+
+n, m = list(map(int, input().split()))
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+giao = []
+hop = []
+i, j = 0, 0
+while (i < n and j < m):
+  if (a[i] < b[j]):
+    if (a[i] != b[j]):
+      hop.append(a[i])
+      i += 1
+    else:         # Nếu giống nhau thì đều đưa vào giao và hợp và tăng cả 2 index
+      hop.append(a[i])
+      giao.append(a[i])
+      i += 1
+      j += 1
+  else:
+    if (a[i] != b[j]):
+      hop.append(b[j])
+      j += 1
+    else:
+      hop.append(b[j])
+      giao.append(b[j])
+      i += 1
+      j += 1
+
+while (i < n):
+  hop.append(a[i])
+  i += 1
+
+while (j < m):
+  hop.append(b[j])
+  j += 1
+
+for x in hop:
+  print(x, end = " ")
+print()
+for x in giao:
+  print(x, end = " ")
+
+
+
+
+
+
+
+
+
 #!SECTION
 
