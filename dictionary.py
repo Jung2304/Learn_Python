@@ -466,7 +466,7 @@ for x in res:
   print(x, end = " ")
 """
 
-#ANCHOR - Đếm tần suất
+#ANCHOR - Đếm tần suất thường
 """
 n = int(input())
 a = list(map(int, input().split()))
@@ -502,7 +502,7 @@ print(*union)     #< "*": unpacking operator
 
 #ANCHOR - Tìm hợp và giao của 2 mảng (2)
 # Giống bài trộn 2 dãy đã sắp xếp. Nếu khác nhau thì đưa vào hợp, giống nhau đưa cả vào hợp và giao
-
+"""
 n, m = list(map(int, input().split()))
 a = list(map(int, input().split()))
 b = list(map(int, input().split()))
@@ -542,8 +542,52 @@ for x in hop:
 print()
 for x in giao:
   print(x, end = " ")
+"""
 
+#ANCHOR - Đếm tần suất snt
+"""
+def is_prime(n):
+  return n > 1 and all(n % i for i in range(2, int(n**0.5) + 1))
 
+#< all(n % i for i in range(2, int(n**0.5) + 1)): 
+#> all(): ktra tất cả ptu trong một iterable có là True hay không. Tất cả đúng → True, chỉ cần một sai → False
+#> int(n**0.5) + 1: giống math.isqrt(n) + 1
+
+if __name__ == "__main__":
+  a = list(map(int, input().split())) 
+  cnt = {}
+  b = []
+
+  for x in a:
+    if (is_prime(x)):
+      if x in cnt:
+        cnt[x] += 1
+      else:
+        cnt[x] = 1
+        b.append(x)
+  
+  for x in b:
+    print(x, cnt[x])
+"""
+
+#ANCHOR - BRT
+"""
+# Khoảng cách ngắn nhất giữa 2 thị trấn, và sl cặp thị trấn có cùng khoảng cách ngắn nhất này
+#! Sort và xét 2 tp cạnh nhau
+
+n = int(input())
+a = list(map(int, input().split()))
+a.sort()
+min = 10**18
+cnt = 0
+for x in range(1, n):
+  if abs(a[x] - a[x - 1]) < min:
+    min = abs(a[x] - a[x - 1])
+    cnt = 1
+  elif abs(a[x] - a[x - 1]) == min:
+    cnt += 1
+print(min, cnt)
+"""
 
 
 
