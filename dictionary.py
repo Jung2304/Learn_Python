@@ -589,6 +589,97 @@ for x in range(1, n):
 print(min, cnt)
 """
 
+#ANCHOR - Định lý Pytago
+"""
+# Ktra nếu trong mảng tồn tại 3 cặp thỏa mãn bộ 3 Pytago -> Bình phương tất cả + sort + meet in the middle
+
+def check_pytago(a, n):
+  # Xét từ index cuối đến index thứ 3 (trừ 2 thg cuối)
+  for i in range(n - 1, 1, -1):           # range(start, stop, step)
+    left, right = 0, i - 1
+    while left < right:
+      if (a[left] + a[right] == a[i]):
+        return True
+      elif (a[left] + a[right] < a[i]):
+        left += 1
+      else:
+        right -= 1
+  return False
+
+if __name__ == "__main__":
+  n = int(input())
+  a = list(map(int, input().split()))
+  a = [x**2 for x in a]
+  a.sort()
+  if (check_pytago(a, n)):
+    print("YES")
+  else:
+    print("NO")
+"""
+
+#ANCHOR - Mảng cộng dồn (Prefix sum)
+"""
+# Truy vấn tổng trên đoạn
+
+n = int(input())
+a = list(map(int, input().split()))
+
+#< Tạo trước một mảng prefix sum
+F = [None] * n
+for i in range(n):
+  if (i == 0):
+    F[0] = a[0]
+  else:
+    F[i] = F[i - 1] + a[i] 
+
+q = int(input())
+for i in range(q):
+  l, r = map(int, input().split())
+  l -= 1
+  r -= 1
+  if l == 0:
+    print(F[r])
+  else:
+    print(F[r] - F[l - 1])        # Tổng từ chỉ số 0 -> r 
+"""
+
+#ANCHOR - Đếm sl cặp số bằng nhau trong mảng
+
+#> Không dùng 2 vòng for lồng nhau
+#< Dùng ct tổ hợp chập
+
+def calc_factorial(n):
+  res = 1
+  for i in range(n, 0, -1):
+    res *= i
+  return res
+
+def calc(k, n):
+  return int(calc_factorial(n) / (calc_factorial(k) * calc_factorial(n - k)))
+
+if __name__ == "__main__":
+  n = int(input())
+  a = list(map(int, input().split()))
+  cnt = {}
+  for x in a:
+    if x not in cnt:
+      cnt[x] = 1
+    else:
+      cnt[x] += 1
+
+  sum = 0
+  for frequency in cnt.values():
+    if frequency <= 1:
+      continue
+    else:
+      sum += calc(2, frequency)
+  
+  print(sum)
+
+
+
+
+
 
 
 
