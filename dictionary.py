@@ -644,9 +644,9 @@ for i in range(q):
 """
 
 #ANCHOR - Đếm sl cặp số bằng nhau trong mảng
-
+"""
 #> Không dùng 2 vòng for lồng nhau
-#< Dùng ct tổ hợp chập
+#! Cách 1: Dùng ct tổ hợp chập (viết hàm)
 
 def calc_factorial(n):
   res = 1
@@ -676,13 +676,41 @@ if __name__ == "__main__":
   
   print(sum)
 
+#! Cách 2: Dùng ct tổ hợp chập về mặt toán học (nhanh hơn)  
+#< CT: C(2, n) = n(n−1)/2
 
+n = int(input())
+a = list(map(int, input().split()))
+d = {}
+for x in a:
+  if x not in d:
+    d[x] = 1
+  else:
+    d[x] += 1
 
+ans = 0
+for x in d:
+  ans += d[x] * (d[x] - 1) // 2
+print(ans)
+"""
 
+#ANCHOR - Sliding Window (Not Optimal)
+"""
+#> Với k cho trước, hãy tìm dãy con liên tiếp k ptu sao cho tổng lớn nhất
+#< Phải cộng k ptu lại từ đầu -> Độ phức tạp cao
 
-
-
-
+n, k = map(int,input().split())
+a = list(map(int, input().split()))
+ans, pos = 0, 0     # ans: kqua: pos: vị trí
+for x in range(n - k + 1):      # (n - k): đảm bảo mỗi dãy 4 ptu
+  tmp = sum(a[x : x + k])
+  if tmp > ans:
+    ans = tmp
+    pos = x
+print(ans)
+for x in a[pos : pos + k]:
+  print(x, end = ' ')
+"""
 
 
 
