@@ -676,8 +676,8 @@ if __name__ == "__main__":
   
   print(sum)
 
-#! Cách 2: Dùng ct tổ hợp chập về mặt toán học (nhanh hơn)  
-#< CT: C(2, n) = n(n−1)/2
+#! Cách 2: Đếm sl từng ptu và Dùng ct tổ hợp chập về mặt toán học (nhanh hơn)  
+#< CT: C(2, n) = n(n-1)/2
 
 n = int(input())
 a = list(map(int, input().split()))
@@ -701,9 +701,9 @@ print(ans)
 
 n, k = map(int,input().split())
 a = list(map(int, input().split()))
-ans, pos = 0, 0     # ans: kqua: pos: vị trí
+ans, pos = 0, 0     # ans: result: pos: vị trí
 for x in range(n - k + 1):      # (n - k): đảm bảo mỗi dãy 4 ptu
-  tmp = sum(a[x : x + k])
+  tmp = sum(a[x : x + k])       #< list slicing
   if tmp > ans:
     ans = tmp
     pos = x
@@ -712,6 +712,124 @@ for x in a[pos : pos + k]:
   print(x, end = ' ')
 """
 
+#ANCHOR - Sliding Window (Real, Optimal)
+"""
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+sum, pos = sum(a[0 : k]), 0       # cho sum = tổng của k ptu đầu tiên
+ans = sum
+for x in range(1, n - k + 1):
+  sum = sum - a[x - 1] + a[x + k - 1]        # new window = old window - first item + new added item
+  if sum > ans:
+    ans = sum
+    pos = x
+print(ans)
+for x in a[pos : pos + k]:
+  print(x, end = ' ')
+"""
+
+#ANCHOR - Số bị lặp đầu tiên
+"""
+#< In ra số bị lặp đầu tiên ở trong mảng, nếu không có số nào bị lặp in ra -1
+n = int(input())
+a = list(map(int, input().split()))
+se = set()
+for x in a:
+  if x in se:
+    print(x)
+    break
+  else:
+    se.add(x)
+print(-1)
+"""
+
+#ANCHOR - Trộn 2 dãy và sắp xếp
+"""
+n = int(input())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+a.sort()
+b.sort(reverse = True)
+for i in range(n):
+  print(a[i], b[i], end = ' ')
+"""
+
+#ANCHOR - Vị trí đầu tiên và cuối cùng
+"""
+n, x = map(int, input().split())
+a = list(map(int, input().split()))
+first, last = -1, -1
+for i in range(n):
+  if a[i] == x:
+    last = i
+    if first == -1:
+      first = i 
+print(first + 1, last + 1)
+"""
+
+#ANCHOR - Mảng 012
+"""
+#< Dùng counting sort
+n = int(input())
+a = list(map(int, input().split()))
+cnt = [0] * 3
+for x in a:
+  cnt[x] += 1
+for i in range(3):
+  for j in range(cnt[i]):   
+    print(i, end = ' ')
+"""
+
+#ANCHOR - Số thao tác giúp mảng tăng dần 2
+"""
+import math
+
+n, d = map(int, input().split())
+a = list(map(int, input().split()))
+res = 0
+for i in range(1, len(a)):
+  if a[i] <= a[i-1]:
+    tmp = math.floor((a[i-1] - a[i]) / d + 1)
+    res += tmp
+    a[i] += tmp * d
+print(res)
+"""
+
+#ANCHOR - Product sum
+"""
+n = int(input())
+a = list(map(int, input().split()))
+a.sort()
+res = 0
+for i in range(n):
+  res += i * a[i]
+print(res % (10**9 + 7))
+"""
+
+#ANCHOR - Chia tập
+"""
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+a.sort()
+a1, a2 = [], []
+sum1, sum2 = 0, 0
+for i in range(n-k):
+  a1.append(a[i])
+  sum1 += a[i]
+for j in range(n-k, n):
+  a2.append(a[j])
+  sum2 += a[j]
+res = sum2 - sum1
+for x in a1:
+  print(x, end = " ")
+print()
+for y in a2:
+  print(y, end = " ")
+print()
+print(res)
+"""
+
+#ANCHOR - 
 
 
 #!SECTION

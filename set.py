@@ -225,7 +225,7 @@ for x in giao:
 #ANCHOR - Suffix and Query
 """
 < Precomputes how many distinct elements are in the suffix starting at each index.
-<Answers multiple queries efficiently in O(1) per query.
+< Answers multiple queries efficiently in O(1) per query.
 n = int(input())
 a = list(map(int, input().split()))
 F = [0] * n
@@ -237,6 +237,23 @@ q = int(input())
 for i in range(q):
     left = int(input())
     print(F[left])
+"""
+
+#ANCHOR - Suffix and Query 2
+"""
+n = int(input())
+a = list(map(int, input().split()))
+q = int(input())
+q_list = list(map(int, input().split()))
+res = []
+for i in q_list:
+  se = set({})
+  final_len = 0
+  for j in range(i, n):
+    se.add(a[j])
+    final_len = len(se)
+  res.append(final_len)
+print(res)
 """
 
 #!SECTION
