@@ -37,11 +37,11 @@ print(b)
 """
 #< Demo: Sắp xếp theo digitSum tăng dần
 def digitSum(n):
-    sum = 0
-    while (n != 0):
-        sum += n % 10
-        n //= 10
-    return sum
+  sum = 0
+  while (n != 0):
+    sum += n % 10
+    n //= 10
+  return sum
 
 a = [4, 10, 100, 10000, 3, 12, 13, 54, 32, 24, 765, 34, 22, 31, 53]
 a.sort(key = digitSum)
@@ -60,36 +60,36 @@ print(a)
 """
 #< Demo: Theo thành phần thứ 2 tăng dần, sau đó tới thành phần thứ 1 tăng dần (define function)
 def getItem(a):
-    return a[1], a[0]
+  return a[1], a[0]
 
 if __name__  == '__main__':
-    a = [[3, 2], [4, 5], [2, 6], [1, 4], [3, 1]]
-    a.sort(key = getItem)       # sort theo ptu thứ nhất trong nested list
-    print(a)
+  a = [[3, 2], [4, 5], [2, 6], [1, 4], [3, 1]]
+  a.sort(key = getItem)       # sort theo ptu thứ nhất trong nested list
+  print(a)
 #> vì khi dùng a.sort thì sẽ thao tác trên các ptu trong list, khi dùng getItem thì sẽ truy cập lần 2 -> nested list 
 
 #< Demo: Theo thành phần thứ 1 tăng dần, sau đó thành phần thứ 2 giảm dần (trái nhau -> trái dấu)
 def getItem(a):
-    return a[0], -a[1]          # thứ nhất (a[0]) tăng dần, thứ hai (a[1]) giảm dần -> trái dấu
+  return a[0], -a[1]          # thứ nhất (a[0]) tăng dần, thứ hai (a[1]) giảm dần -> trái dấu
 
 if __name__ == '__main__':
-    a = [[3, 2], [4, 5], [2, 6], [1, 4], [3, 1]]
-    a.sort(key = getItem)
-    print(a)
+  a = [[3, 2], [4, 5], [2, 6], [1, 4], [3, 1]]
+  a.sort(key = getItem)
+  print(a)
 """
 
 #ANCHOR - Sắp xếp theo nhiều tiêu chí 
 """
 #< Sắp xếp theo lương tăng dần, nếu 2 người cùng lương thì sort theo tên tăng dần theo thứ tự từ điển
 dictionary = [
-    {'name' : 'Tran Xuan Loc', 'job' : 'Dev', 'salary' : 500}, 
-    {'name' : 'Thieu Ngoc Tuan', 'job' : 'Dev', 'salary' : 1500}, 
-    {'name' : 'Phung Duc Kien', 'job' : 'BA', 'salary' : 500}, 
-    {'name' : 'Huynh Manh Tuong', 'job' : 'Tester', 'salary' : 2000}, 
+  {'name' : 'Tran Xuan Loc', 'job' : 'Dev', 'salary' : 500}, 
+  {'name' : 'Thieu Ngoc Tuan', 'job' : 'Dev', 'salary' : 1500}, 
+  {'name' : 'Phung Duc Kien', 'job' : 'BA', 'salary' : 500}, 
+  {'name' : 'Huynh Manh Tuong', 'job' : 'Tester', 'salary' : 2000}, 
 ]
 dictionary.sort(key = lambda x : (x.get('salary'), x.get('name')))
 for x in dictionary:
-    print(x)
+  print(x)
 """
 
 #ANCHOR - Kết hợp hàm sort với itemgetter() và attrgetter()
@@ -98,13 +98,16 @@ for x in dictionary:
 from operator import itemgetter, attrgetter
 
 #> List of tuples, each item inside the list is a tuple ("name", age) -> itemgetter() dùng cho list, tuple và dict
-friends = [("Huynh Manh Tuong", 30), 
-        ("Tran Nhat Phi", 28),
-        ("Tuan Binh", 21),
-        ("Thieu Tuan", 35)]
+friends = 
+[
+("Huynh Manh Tuong", 30), 
+("Tran Nhat Phi", 28),
+("Tuan Binh", 21),
+("Thieu Tuan", 35)
+]
 friends.sort(key = itemgetter(1))       # sort theo độ tuổi
 for x in friends:
-    print(x)
+  print(x)
 
 #> Sort theo nhiều tiêu chí
 friends = [("Huynh Manh Tuong", 30, 'B'), 
@@ -113,8 +116,7 @@ friends = [("Huynh Manh Tuong", 30, 'B'),
         ("Thieu Tuan", 30, 'Z')]
 friends.sort(key = itemgetter(1, 2))    # sort theo độ tuổi và id
 for x in friends:
-    print(x)
-
+  print(x)
 
 #> Hàm attrgetter: dùng cho object (class instance)
 from operator import attrgetter
@@ -138,7 +140,7 @@ for f in sorted_friends:
 
 #ANCHOR - HÀM SORTED
 """
-#! Hàm sorted sẽ không thay đổi iterable mà nó sẽ luôn retun một LIST đã được sắp xếp tương ứng với iterable đã tryền vào
+#! Hàm sorted sẽ không thay đổi iterable mà nó sẽ luôn return một LIST đã được sắp xếp tương ứng với iterable đã tryền vào
 a = (5, 4, 1, 2, 3)     #< tuple(), list[]
 b = sorted(a)
 print(a)
@@ -162,107 +164,107 @@ a = set(list(map(int, input().split())))
 print(len(a))
 """
 
-#ANCHOR - Binary search (tìm kiếm nhị phân)
+#NOTE - BINARY SEARCH (tìm kiếm nhị phân)
 """
 #! Binary Search chỉ hoạt động với mảng được sắp xếp tăng dần
 #> Time complexity: O(logN)
 def binarySearch(a, x):             # list a và gtri cần tìm x
-    left, right = 0, len(a) - 1
-    while (left <= right):
-        mid = (left + right) // 2
-        if (a[mid] == x):
-            return True
-        elif (a[mid] < x):
-            left = mid + 1
-        else:
-            right = mid - 1
-    return False
+  left, right = 0, len(a) - 1
+  while (left <= right):
+    mid = (left + right) // 2
+    if (a[mid] == x):
+      return True
+    elif (a[mid] < x):
+      left = mid + 1
+    else:
+      right = mid - 1
+  return False
 
 if __name__ == '__main__':
-    n = int(input())
-    a = list(map(int, input().split()))
-    a.sort()
-    q = int(input())
-    for i in range(q):
-        x = int(input())
-        if (binarySearch(a, x)):
-            print('YES')
-        else:
-            print('NO')
+  n = int(input())
+  a = list(map(int, input().split()))
+  a.sort()
+  q = int(input())
+  for i in range(q):
+    x = int(input())
+    if (binarySearch(a, x)):
+      print('YES')
+    else:
+      print('NO')
 """
 
 #ANCHOR - Tìm kiếm nhị phân biến đổi
 """
 #1: Tìm vị trí xuất hiện đầu tiên của ptu X trong mảng
 def binarySearchFirstElement(a, x):
-    left, right = 0, len(a) - 1
-    result = -1
-    while(left <= right):
-        mid = (left + right) // 2
-        if (a[mid] == x):
-            result = mid
-            right = mid - 1         # keep searching on the left to find the left-most index
-        elif (a[mid] < x):
-            left = mid + 1
-        else:
-            right = mid - 1
-    return result
+  left, right = 0, len(a) - 1
+  result = -1
+  while(left <= right):
+    mid = (left + right) // 2
+    if (a[mid] == x):
+      result = mid
+      right = mid - 1         # keep searching on the left to find the left-most index
+    elif (a[mid] < x):
+      left = mid + 1
+    else:
+      right = mid - 1
+  return result
 
 #2: Tìm vị trí xuất hiện cuối cùng của ptu X trong mảng         
 def binarySearchLastElement(a, x):
-    left, right = 0, len(a) - 1
-    result = -1
-    while(left <= right):
-        mid = (left + right) // 2
-        if (a[mid] == x):
-            result = mid
-            left = mid + 1        # keep searching on the right to find the right-most index
-        elif (a[mid] < x):
-            left = mid + 1
-        else:
-            right = mid - 1
-    return result
+  left, right = 0, len(a) - 1
+  result = -1
+  while(left <= right):
+    mid = (left + right) // 2
+    if (a[mid] == x):
+      result = mid
+      left = mid + 1        # keep searching on the right to find the right-most index
+    elif (a[mid] < x):
+      left = mid + 1
+    else:
+      right = mid - 1
+  return result
 
 #3: Tìm vị trí xuất hiện đầu tiên của ptu >= X trong mảng
 def binarySearchFirstBiggerOrEqualThan(a, x):
-    left, right = 0, len(a) - 1
-    result = -1
-    while (left <= right):
-        mid = (left + right) // 2
-        if (a[mid] >= x):
-            result = mid
-            right = mid - 1
-        else:
-            left = mid + 1
-    return result
+  left, right = 0, len(a) - 1
+  result = -1
+  while (left <= right):
+    mid = (left + right) // 2
+    if (a[mid] >= x):
+      result = mid
+      right = mid - 1
+    else:
+      left = mid + 1
+  return result
 
 #4: Tìm vị trí xuất hiện đầu tiên của ptu >= X trong mảng
 def binarySearchFirstBiggerThan(a, x):
-    left, right = 0, len(a) - 1
-    result = -1
-    while (left <= right):
-        mid = (left + right) // 2
-        if (a[mid] > x):
-            result = mid
-            right = mid - 1
-        else:
-            left = mid + 1
-    return result
+  left, right = 0, len(a) - 1
+  result = -1
+  while (left <= right):
+    mid = (left + right) // 2
+    if (a[mid] > x):
+      result = mid
+      right = mid - 1
+    else:
+      left = mid + 1
+  return result
 
 #5: Tìm số lần xuất hiện của ptu X trong mảng sử dụng kết quả của hàm 1 và 2
 if __name__ == '__main__':
-    n, x = map(int, input().split())
-    a = list(map(int, input().split()))
-    a.sort()
-    first = binarySearchFirstElement(a, x)
-    last = binarySearchLastElement(a, x)
-    third = binarySearchFirstBiggerOrEqualThan(a, x)
-    fourth = binarySearchFirstBiggerThan(a, x)
-    print(first, last, third, fourth, sep = '\n')
-    if first == -1:             # không tồn tại ptu đó
-        print(0)
-    else:           
-        print(last - first + 1)     # vì đã được sắp xếp tăng dần 
+  n, x = map(int, input().split())
+  a = list(map(int, input().split()))
+  a.sort()
+  first = binarySearchFirstElement(a, x)
+  last = binarySearchLastElement(a, x)
+  third = binarySearchFirstBiggerOrEqualThan(a, x)
+  fourth = binarySearchFirstBiggerThan(a, x)
+  print(first, last, third, fourth, sep = '\n')
+  if first == -1:             # không tồn tại ptu đó
+    print(0)
+  else:           
+    print(last - first + 1)     # vì đã được sắp xếp tăng dần 
 """
 
 #ANCHOR - Tăng dần, giảm dần
@@ -271,10 +273,10 @@ n = int(input())
 a = list(map(int, input().split()))
 a.sort()
 for x in a:
-    print(x, end = ' ')
+  print(x, end = ' ')
 print()
 for x in a[::-1]:
-    print(x, end = ' ')
+  print(x, end = ' ')
 """
 
 #ANCHOR - Sắp xếp theo trị tuyệt đối
@@ -292,15 +294,15 @@ for x in a:
 def calSum(n):
     total = 0
     while n != 0:
-        total += n % 10
-        n //= 10
+      total += n % 10
+      n //= 10
     return total
 if __name__ == '__main__':
     n = int(input())
     a = list(map(int, input().split()))
     a.sort(key = lambda x : (calSum(x), x))     # tổng chữ số trước, sau đó là giá trị
     for x in a:
-        print(x, end = ' ')
+      print(x, end = ' ')
 """
 
 #ANCHOR - Khoảng cách nhỏ nhất
@@ -320,16 +322,16 @@ n = int(input())
 a = list(map(int, input().split()))
 d = {}
 for x in a:
-    if x in d:
-        d[x] += 1
-    else:
-        d[x] = 1
+  if x in d:
+    d[x] += 1
+  else:
+    d[x] = 1
 b = sorted(d.items())
 res, fre = 0, 0
 for giatri, tansuat in b:               # giatri = key, tansuat = value
-    if tansuat > fre:
-        fre = tansuat
-        res = giatri
+  if tansuat > fre:
+    fre = tansuat
+    res = giatri
 print(res, fre)
 """
 
@@ -340,12 +342,12 @@ b = list(map(int, input().split()))
 c = list(map(int, input().split()))
 i, j = 0, 0
 while i < n and j < m:
-    if b[i] <= c[j]:
-        print('b', i + 1, sep = '', end = ' ' )
-        i += 1
-    else:
-        print('c', j + 1, sep = '', end = ' ')
-        j += 1
+  if b[i] <= c[j]:
+    print('b', i + 1, sep = '', end = ' ' )
+    i += 1
+  else:
+    print('c', j + 1, sep = '', end = ' ')
+    j += 1
 while i < n:
     print('b', i + 1, sep = '', end = ' ')
     i += 1
@@ -364,12 +366,12 @@ nu.sort()
 ans = 0
 i, j = 0, 0
 while i < n and j < m:
-    if nam[i] <= nu[j]:             # bạn nam thấp nhất thấp hơn cả bạn nữ thấp nhất thì tăng lên bạn nam kế
-        i += 1
-    else:
-        ans += 1
-        i += 1
-        j += 1
+  if nam[i] <= nu[j]:             # bạn nam thấp nhất thấp hơn cả bạn nữ thấp nhất thì tăng lên bạn nam kế
+    i += 1
+  else:
+    ans += 1
+    i += 1
+    j += 1
 print(ans)
 """
 
@@ -380,11 +382,11 @@ a = list(map(int, input().split()))
 a.sort(reverse = True)
 docung, res = a[0], 1               # docung viên gạch dưới cùng luôn lớn nhất
 for i in range(1, n):
-    if docung <= 0:
-        break
-    else:
-        res += 1
-        docung = min((docung - 1), a[i])       # khi đặt 1 viên gạch lên thì docung của viên gạch trước giảm đi 1 và ktra viên gạch vừa đặt lên có docung bao nhiêu
+  if docung <= 0:
+    break
+  else:
+    res += 1
+    docung = min((docung - 1), a[i])       # khi đặt 1 viên gạch lên thì docung của viên gạch trước giảm đi 1 và ktra viên gạch vừa đặt lên có docung bao nhiêu
 print(res)
 """
 
@@ -395,10 +397,10 @@ a = list(map(int, input().split()))
 res = 0
 a.sort(reverse = True)          # lấy số lượng lớn nhất
 for i in range(n):
-    if a[i] > i:
-        res += a[i] - i         # trường hợp bị trừ không còn lít nào -> tránh số âm
-    else:
-        break
+  if a[i] > i:
+    res += a[i] - i         # trường hợp bị trừ không còn lít nào -> tránh số âm
+  else:
+    break
 print(res)
 """
 
@@ -409,8 +411,8 @@ a = list(map(int, input().split()))
 ans = 1         # kể cả khi không có nhóm nào thì tất cả số vẫn là 1 nhóm
 a.sort()
 for i in range(1, n):
-    if (a[i] - a[i - 1]) > k:          # chỉ khi vượt quá k thì mới tách thành 1 nhóm khác
-        ans += 1
+  if (a[i] - a[i - 1]) > k:          # chỉ khi vượt quá k thì mới tách thành 1 nhóm khác
+    ans += 1
 print(ans)
 """
 
@@ -438,14 +440,14 @@ print(ans)
 n = int(input())
 a = []
 for i in range(n):
-    b = list(map(int, input().split()))
-    a.append(b)
+  b = list(map(int, input().split()))
+  a.append(b)
 a.sort(key = lambda x : x[1])   #< sắp xếp theo t/gian kết thúc tăng dần
 ans, end_time = 1, a[0][1]      #> t/gian của công việc đầu tiên là a[0][1]
 for i in range(1, n):
-    if a[i][0] > end_time:      #> t/gian bắt đầu của công việc thứ i phải lớn hơn end_time của công việc trước
-        ans += 1
-        end_time = a[i][1]
+  if a[i][0] > end_time:      #> t/gian bắt đầu của công việc thứ i phải lớn hơn end_time của công việc trước
+    ans += 1
+    end_time = a[i][1]
 print(ans)
 """
 
@@ -463,23 +465,23 @@ print(M - m + 1 - len(a))     #< đầu - cuối + 1: số ptu đáng lẽ phả
 n = int(input())
 a = set(input())        # đưa vào set sẽ tách ra từng chữ số
 if ' ' in a:
-    a.remove(' ')
+  a.remove(' ')         # bỏ khoảng trắng
 b = sorted(a)
 for x in b:
-    print(x, end = ' ')
+  print(x, end = ' ')
 
 #< Cách 2: Tách từng số
 n = int(input())
 se = set({})
 a = list(map(int,input().split()))
 for x in a:
-    tmp = x
-    while tmp != 0:
-        se.add(tmp % 10)
-        tmp //= 10
+  tmp = x
+  while tmp != 0:
+    se.add(tmp % 10)
+    tmp //= 10
 b = sorted(se)
 for x in b:
-    print(x, end = ' ')
+  print(x, end = ' ')
 """
 
 #ANCHOR - Sắp xếp theo tần suất
@@ -488,24 +490,25 @@ n = int(input())
 a = list(map(int, input().split()))
 d = {}
 for x in a:
-    if x in d:
-        d[x] += 1
-    else:
-        d[x] = 1
+  if x in d:
+    d[x] += 1
+  else:
+    d[x] = 1
 
 #< Tần suất giảm dần, nếu cùng tần suấtthì số nào nhỏ hơn in trước
 b = list(d.items())
 b.sort(key = lambda x : (-x[1], x[0]))
 for giatri, tansuat in b:
-    for _ in range(tansuat):
-        print(giatri, end = ' ')
+  for _ in range(tansuat):
+    print(giatri, end = ' ')
 print()
+
 #< Tần suất giảm dần, nếu cùng tần suất thì in theo thứ tự xuất hiện
 c = list(d.items())
 c.sort(key = lambda x : -x[1])
 for giatri, tansuat in c:
-    for _ in range(tansuat):            #> range(tansuat) → loop tansuat times.
-        print(giatri, end = ' ')
+  for _ in range(tansuat):            #> range(tansuat) → loop tansuat times.
+    print(giatri, end = ' ')
 """
 
 #ANCHOR - Biểu thức cho ra giá trị lớn nhất
@@ -513,13 +516,13 @@ for giatri, tansuat in c:
 #< k dấu cộng vào k ptu lớn nhất, (n - 1 - k) dấu trừ vào các ptu nhỏ nhất
 n, k = map(int, input().split())
 a = list(map(int, input().split()))
-a[1:] = sorted(a[1:], reverse = True)       #> This sorts the list from index 1 to the end in descending order.
+a[1:] = sorted(a[1:], reverse = True)       #> Chừa ptu đầu, còn lại sort giảm dần để đặt k dấu cộng
 ans = a[0]
 for i in range(1, n):
-    if i <= k:                  #> For the first k elements after a[0], we add them to ans.
-        ans += a[i]
-    else:
-        ans -= a[i]            #> For the remaining elements, we subtract them from ans.
+  if i <= k:                  #> For the first k elements after a[0], we add them to ans.
+    ans += a[i]
+  else:
+    ans -= a[i]            #> For the remaining elements, we subtract them from ans.
 print(ans)
 """
 
@@ -528,13 +531,13 @@ print(ans)
 n = int(input())
 a = []
 for _ in range(n):
-    b = list(map(int, input().split()))
-    a.append(b)
+  b = list(map(int, input().split()))
+  a.append(b)
 a.sort(key = lambda x : x[0])           # ai đến trước thì check in trước
 end_time = a[0][0] + a[0][1]            # t/gian cần thiết cho khách 1
 for i in range(1, n):
-    end_time = max(end_time, a[i][0])      # so sánh t/gian end_time và arrival_time của khách thứ i
-    end_time += a[i][1]                    # xong rồi cộng thêm check-in_time của khách thứ i đó
+  end_time = max(end_time, a[i][0])      # so sánh t/gian end_time và arrival_time của khách thứ i
+  end_time += a[i][1]                    # xong rồi lấy và cộng thêm check-in time của khách thứ i đó
 print(end_time)
 """
 
@@ -543,51 +546,108 @@ print(end_time)
 n = int(input())
 a = list(map(int, input().split()))
 for x in a:
-    if x != 0:
-        print(x, end = ' ')
+  if x != 0:
+    print(x, end = ' ')
 print('0 ' * a.count(0))
 """
 
 #NOTE - SELECTION SORT (sắp xếp chọn)
 """
 def selectionSort(a, n):
-    cnt = 1
-    for i in range(n - 1):
-        min_index = i
-        for j in range(i + 1, n):
-            if a[j] < a[min_index]:
-                min_index = j
-        a[i], a[min_index] = a[min_index], a[i]
-        print(f'Buoc {cnt}:', end = ' ')        # f-string formatting to insert the current step number cnt into the string 
-        printArray(a)
-        cnt += 1
+  cnt = 1
+  for i in range(n - 1):
+    min_index = i
+    for j in range(i + 1, n):
+      if a[j] < a[min_index]:
+        min_index = j
+    a[i], a[min_index] = a[min_index], a[i]
+    print(f'Buoc {cnt}:', end = ' ')        # f-string formatting to insert the current step number cnt into the string 
+    printArray(a)
+    cnt += 1
 
 def printArray(a):
-    for x in a:
-        print(x, end = ' ')
-    print()
+  for x in a:
+    print(x, end = ' ')
+  print()
 
 if __name__ == '__main__':
-    n = int(input())
-    a = list(map(int, input().split()))
-    selectionSort(a, n)
+  n = int(input())
+  a = list(map(int, input().split()))
+  selectionSort(a, n)
 """
 
 #NOTE - INSERTION SORT (sắp xếp chèn) 
-
+"""
 n = int(input())
 a = list(map(int, input().split()))
 for i in range(1, n):
-    #> Chèn a[i] vào đoạn [0; i - 1]
-    pos, val = i - 1, a[i]
-    while pos >= 0 and a[pos] > val:
-        a[pos + 1] = a[pos]         # dịch sang phải
-        pos -= 1
-    a[pos + 1] = val
-    print("Buoc " + str(i) + " : ", end = ' ')
-    for x in a:
-        print(x, end = ' ')
-    print()
+  pos, val = i - 1, a[i]
+
+  #> Chèn a[i] vào đoạn [0; i - 1]
+  while pos >= 0 and a[pos] > val:
+    a[pos + 1] = a[pos]         # dịch sang phải
+    pos -= 1
+  a[pos + 1] = val
+  print("Buoc " + str(i) + " : ", end = ' ')
+  for x in a:
+    print(x, end = ' ')
+  print()
+"""
+
+#NOTE - BUBBLE SORT (sắp xếp nổi bọt)
+"""
+n = int(input())
+a = list(map(int, input().split()))
+for i in range(n - 1):
+  for j in range(0, n - i - 1):       # cứ mỗi bước thì có 1 ptu lại được sắp xếp => trừ 1 sau mỗi bước
+    if a[j] > a[j + 1]:
+      a[j], a[j + 1] = a[j + 1], a[j]       # swap
+  print("Buoc " + str(i + 1) + ": ", end = "")
+  for x in a:
+    print(x, end = " ")
+  print()
+13
+54 3 42 94 61 25 24 55 80 62 79 44 14
+"""
+
+#ANCHOR - Cặp số có tổng bằng k
+"""
+import bisect           #< module giúp: tìm vị trí chèn một ptu vào sorted array sao cho vẫn giữ thứ tự tăng dần
+
+#< Cách 1: Binary search
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+a.sort()
+cnt = 0
+for i in range(n):
+  aim = k - a[i]
+
+  #! Tìm tất cả ptu = aim ở phía sau i (tức i + 1)
+  left = bisect.bisect_left(a, aim, i + 1)      #< pos bên trái nhất để chèn aim vào list a sao cho vẫn giữ thứ tự.
+  right = bisect.bisect_right(a, aim, i + 1)    #< pos bên phải nhất để chèn aim vào list a sao cho vẫn giữ thứ tự.
+  cnt += (right - left)
+print(cnt)
+
+#< Cách 2: Two pointers
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+
+a.sort()
+l, r = 0, n - 1
+cnt = 0
+
+while l < r:
+  s = a[l] + a[r]
+  if s == k:
+    cnt += 1
+    l += 1
+    r -= 1
+  elif s < k:
+    l += 1
+  else:
+    r -= 1
+print(cnt)
+"""
 
 
 #!SECTION
