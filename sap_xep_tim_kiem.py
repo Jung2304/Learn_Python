@@ -649,6 +649,140 @@ while l < r:
 print(cnt)
 """
 
+#ANCHOR - Cặp số có tổng nhỏ hơn k
+"""
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+
+a.sort()
+l, r = 0, n - 1
+cnt = 0
+
+while l < r:
+  s = a[l] + a[r]
+  if s < k:
+    cnt += (r - l)            
+    l += 1          # ta đã đếm hết cặp với a[l] => chuyển sang ptu tiếp theo (l += 1)
+  else:
+    r -= 1
+print(cnt)
+"""
+
+#ANCHOR - Cặp số có tổng lớn hơn k
+"""
+n, k = map(int, input().split())
+a = list(map(int, input().split()))
+
+a.sort()
+l, r = 0, n - 1
+cnt = 0
+
+while l < r:
+  s = a[l] + a[r]
+  if s > k:
+    cnt += (r - l)      
+    r -= 1
+  else:
+    l += 1
+print(cnt)
+"""
+
+#ANCHOR - Cặp số có hiệu bằng X
+"""
+n, x = map(int, input().split())
+a = list(map(int, input().split()))
+
+a.sort()
+l, r = 0, n - 1
+flag = False
+
+while l < r:
+  s = a[r] - a[l]
+  if s == x:
+    flag = True
+    break
+  elif s > x:
+    l += 1
+  else:
+    r -= 1
+
+print(1 if flag else -1)
+"""
+
+#ANCHOR - Số nhỏ nhất lớn hơn A[i]
+"""
+#< Dùng bisect để trả về ptu đầu tiên > A[i]
+import bisect 
+
+n = int(input())
+a = list(map(int, input().split()))
+
+b = sorted(a) 
+res = []
+
+for x in a:
+  pos = bisect.bisect_right(b, x)      #> Trong sorted list b, trả về vị trí ptu đầu tiên > ptu x trong list a
+  
+  if (pos < n):
+    res.append(b[pos])
+  else:
+    res.append("_")
+print(res)
+"""
+
+#ANCHOR - Đèn lồng
+"""
+n, l = map(int, input().split())
+a = list(map(int, input().split()))
+a.sort()
+
+# Đầu và cuối
+d = max(a[0], l - a[-1])
+
+# Khoảng giữa
+for i in range(n - 1):
+  d = max(d, (a[i + 1] - a[i]) / 2)
+print(f"{d:.10f}")
+"""
+
+#ANCHOR - Dragon
+"""
+n, s = map(int, input().split())
+a = []
+
+for _ in range(n):
+  x, y = map(int, input().split())
+  a.append((x, y))
+
+a.sort()
+
+for x, y in a:
+  if s > x:
+    s += y
+  else:
+    print("NO")
+    break
+else:
+  print("YES")
+"""
+
+#ANCHOR - Xếp trẻ
+"""
+n, x = map(int, input().split())
+a = list(map(int, input().split()))
+
+a.sort()
+cnt = 0
+l, r = 0, n - 1
+
+while (l <= r):
+  if (a[l] + a[r]) <= x:
+    l += 1
+  r -= 1          # người nặng nhất luôn có 1 thuyền riêng
+  cnt += 1        # mỗi vòng 1 thuyền
+print(cnt)
+"""
+
 
 #!SECTION
 
